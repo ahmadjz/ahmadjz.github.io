@@ -1,0 +1,76 @@
+---
+import type { Content } from '../../i18n/content';
+import { IDENTITY } from '../../data/site';
+import Icon from '../Icon.astro';
+
+interface Props {
+  content: Content;
+  cvHref: string;
+}
+const { content, cvHref } = Astro.props;
+const c = content.contact;
+const iconFor: Record<string, string> = {
+  github: 'github',
+  linkedin: 'linkedin',
+  email: 'mail',
+  phone: 'phone',
+};
+---
+<section id="contact" class="scroll-mt-24 py-20 sm:py-28">
+  <div class="container-page">
+    <div
+      class="relative overflow-hidden rounded-3xl border border-line-strong p-8 text-center sm:p-14"
+      data-reveal
+    >
+      <div
+        class="pointer-events-none absolute inset-0 -z-10 opacity-70"
+        style="background: radial-gradient(70% 120% at 50% 0%, color-mix(in oklab, var(--color-accent) 16%, transparent), transparent 60%);"
+      >
+      </div>
+
+      <p class="eyebrow">{c.eyebrow}</p>
+      <h2
+        class="mx-auto mt-3 max-w-2xl font-semibold tracking-tight"
+        style="font-size:var(--text-h1);line-height:var(--text-h1--line-height);letter-spacing:var(--text-h1--letter-spacing)"
+      >
+        {c.title}
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted">{c.lead}</p>
+
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href={`mailto:${IDENTITY.email}`}
+          data-magnetic
+          class="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-medium text-bg transition-colors hover:bg-white"
+        >
+          <Icon name="mail" size={17} />
+          {c.ctaEmail}
+        </a>
+        <a
+          href={cvHref}
+          class="inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3 font-medium text-ink transition-colors hover:bg-elevated"
+        >
+          <Icon name="download" size={17} />
+          {c.ctaCv}
+        </a>
+      </div>
+
+      <ul class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        {c.links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              target={l.kind === 'github' || l.kind === 'linkedin' ? '_blank' : undefined}
+              rel={l.kind === 'github' || l.kind === 'linkedin' ? 'noopener noreferrer' : undefined}
+              dir={l.kind === 'phone' || l.kind === 'email' ? 'ltr' : undefined}
+              class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-muted transition-colors hover:border-line-strong hover:text-ink focus-visible:text-ink"
+            >
+              <Icon name={iconFor[l.kind]} size={16} />
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

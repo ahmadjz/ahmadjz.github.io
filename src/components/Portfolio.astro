@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Hero from './sections/Hero.astro';
+import Work from './sections/Work.astro';
+import About from './sections/About.astro';
+import Skills from './sections/Skills.astro';
+import Experience from './sections/Experience.astro';
+import Community from './sections/Community.astro';
+import Contact from './sections/Contact.astro';
+import { getContent } from '../i18n';
+import { CV_PDF, CV_PDF_AR } from '../data/site';
+import type { Locale } from '../data/site';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const content = getContent(lang);
+const base = import.meta.env.BASE_URL;
+const clean = (p: string) => p.replace(/\/{2,}/g, '/');
+
+const homeHref = lang === 'ar' ? clean(`${base}ar/`) : base;
+const altHref = lang === 'ar' ? base : clean(`${base}ar/`);
+const cvHref = clean(`${base}${lang === 'ar' ? CV_PDF_AR : CV_PDF}`);
+---
+<Base lang={lang} content={content}>
+  <Header content={content} lang={lang} homeHref={homeHref} altHref={altHref} cvHref={cvHref} />
+  <main id="main">
+    <Hero content={content} cvHref={cvHref} />
+    <Work content={content} lang={lang} />
+    <About content={content} />
+    <Skills content={content} />
+    <Experience content={content} />
+    <Community content={content} />
+    <Contact content={content} cvHref={cvHref} />
+  </main>
+  <Footer content={content} />
+</Base>

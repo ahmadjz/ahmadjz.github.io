@@ -1,0 +1,111 @@
+---
+import type { Content } from '../../i18n/content';
+import type { Locale } from '../../data/site';
+import Section from '../Section.astro';
+import ProjectCard from '../ProjectCard.astro';
+import ArchitectureDiagram from '../islands/ArchitectureDiagram.tsx';
+import Icon from '../Icon.astro';
+
+interface Props {
+  content: Content;
+  lang: Locale;
+}
+const { content, lang } = Astro.props;
+const w = content.work;
+
+const anchor = w.projects.find((p) => p.anchor);
+const featured = w.projects.filter((p) => p.featured && !p.anchor);
+const also = w.projects.filter((p) => !p.featured);
+
+const tierLabels =
+  lang === 'ar'
+    ? ['العملاء', 'العقد المشترك', 'الخلفية', 'البيانات والبنية']
+    : ['Clients', 'Shared contract', 'Backend', 'Data & infra'];
+---
+<Section id="work" eyebrow={w.eyebrow} title={w.title}>
+  <p slot="intro" class="mt-4 text-lg leading-relaxed text-muted" data-reveal>{w.intro}</p>
+
+  {anchor && (
+    <article
+      data-reveal
+      class="card mb-6 overflow-hidden p-6 sm:p-8 lg:p-10"
+      style="background: linear-gradient(180deg, color-mix(in oklab, var(--color-accent) 6%, var(--color-surface)), var(--color-surface));"
+    >
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+        <div>
+          <div class="flex flex-wrap items-center gap-3">
+            <h3 class="text-3xl font-semibold tracking-tight text-ink">{anchor.name}</h3>
+            <span class="inline-flex items-center gap-1.5 rounded-full border border-accent-2/40 px-2.5 py-1 text-xs text-accent-2">
+              <span class="size-1.5 animate-pulse rounded-full bg-accent-2"></span>
+              {w.buildingLabel}
+            </span>
+          </div>
+          <p class="mt-1 font-mono text-xs text-faint">{anchor.role} · {anchor.year}</p>
+          <p class="mt-5 text-lg font-medium text-ink/90">{anchor.tagline}</p>
+
+          <dl class="mt-5 space-y-3 text-sm leading-relaxed">
+            <div>
+              <dt class="font-mono text-xs uppercase tracking-wider text-accent-soft">01 · Problem</dt>
+              <dd class="mt-1 text-muted">{anchor.problem}</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-xs uppercase tracking-wider text-accent-soft">02 · Approach</dt>
+              <dd class="mt-1 text-muted">{anchor.approach}</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-xs uppercase tracking-wider text-accent-soft">03 · Impact</dt>
+              <dd class="mt-1 text-muted">{anchor.impact}</dd>
+            </div>
+          </dl>
+
+          {anchor.metrics && (
+            <dl class="mt-6 grid grid-cols-3 gap-4">
+              {anchor.metrics.map((m) => (
+                <div>
+                  <dd class="font-mono text-3xl font-semibold text-gradient">
+                    <span data-countup={m.value}>0</span>{m.suffix}
+                  </dd>
+                  <dt class="mt-0.5 text-xs text-faint">{m.label}</dt>
+                </div>
+              ))}
+            </dl>
+          )}
+
+          <ul class="mt-6 flex flex-wrap gap-1.5">
+            {anchor.tech.map((t) => (
+              <li class="rounded-md border border-line bg-elevated/60 px-2 py-0.5 font-mono text-[0.7rem] text-muted">{t}</li>
+            ))}
+          </ul>
+
+          {anchor.links.live && (
+            <a
+              href={anchor.links.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-bg transition-colors hover:bg-white"
+            >
+              <Icon name="external" size={15} />
+              {w.viewLive}
+            </a>
+          )}
+        </div>
+
+        <div class="rounded-2xl border border-line bg-bg/40 p-5 sm:p-6">
+          <p class="text-center text-sm font-semibold text-ink">{w.architectureTitle}</p>
+          <p class="mx-auto mt-1 mb-6 max-w-xs text-center text-xs leading-relaxed text-muted">{w.architectureNote}</p>
+          <ArchitectureDiagram tierLabels={tierLabels} client:visible />
+        </div>
+      </div>
+    </article>
+  )}
+
+  <div class="grid gap-6 md:grid-cols-2" data-reveal-group>
+    {featured.map((p) => <ProjectCard project={p} content={content} />)}
+  </div>
+
+  {also.length > 0 && (
+    <div class="mt-6 grid gap-6 md:grid-cols-2" data-reveal-group>
+      {also.map((p) => <ProjectCard project={p} content={content} compact />)}
+    </div>
+  )}
+</Section>

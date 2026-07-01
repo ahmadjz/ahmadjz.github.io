@@ -1,0 +1,41 @@
+---
+import type { Content } from '../i18n/content';
+import { SOCIALS, CV_LAST_UPDATED } from '../data/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props;
+const year = new Date().getFullYear();
+const socials = [
+  { href: SOCIALS.github, icon: 'github', label: 'GitHub' },
+  { href: SOCIALS.linkedin, icon: 'linkedin', label: 'LinkedIn' },
+  { href: SOCIALS.email, icon: 'mail', label: 'Email' },
+];
+---
+<footer class="border-t border-line/70 py-10">
+  <div class="container-page flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+    <div class="text-center sm:text-start">
+      <p class="font-mono text-sm text-muted">{content.footer.builtWith}</p>
+      <p class="mt-1 text-sm text-faint">
+        &copy; {year} {content.footer.rights} · {content.footer.lastUpdated}: {CV_LAST_UPDATED}
+      </p>
+    </div>
+    <ul class="flex items-center gap-2">
+      {socials.map((s) => (
+        <li>
+          <a
+            href={s.href}
+            target={s.icon === 'mail' ? undefined : '_blank'}
+            rel={s.icon === 'mail' ? undefined : 'noopener noreferrer'}
+            aria-label={s.label}
+            class="grid size-10 place-items-center rounded-lg border border-line text-muted transition-colors hover:border-line-strong hover:text-ink focus-visible:text-ink"
+          >
+            <Icon name={s.icon} size={18} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</footer>

@@ -1,0 +1,84 @@
+---
+import type { Content } from '../i18n/content';
+import type { Locale } from '../data/site';
+import MotionToggle from './MotionToggle.astro';
+import LangToggle from './LangToggle.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  content: Content;
+  lang: Locale;
+  homeHref: string;
+  altHref: string;
+  cvHref: string;
+}
+const { content, lang, homeHref, altHref, cvHref } = Astro.props;
+const nav = [
+  { href: '#work', label: content.nav.work },
+  { href: '#about', label: content.nav.about },
+  { href: '#skills', label: content.nav.skills },
+  { href: '#experience', label: content.nav.experience },
+  { href: '#community', label: content.nav.community },
+  { href: '#contact', label: content.nav.contact },
+];
+const target: Locale = lang === 'ar' ? 'en' : 'ar';
+---
+<header data-header class="fixed inset-x-0 top-0 z-50 border-b border-transparent">
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <a href={homeHref} class="group flex items-center gap-2.5 rounded-lg" aria-label={content.footer.rights}>
+      <span
+        class="grid size-8 place-items-center rounded-lg border border-line-strong font-mono text-sm font-bold text-gradient"
+        aria-hidden="true">AZ</span>
+      <span class="hidden font-semibold tracking-tight sm:inline">Ahmad Zabadneh</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:text-ink focus-visible:text-ink"
+              >{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <MotionToggle labelOn={content.a11y.motionOn} labelOff={content.a11y.motionOff} />
+      <LangToggle href={altHref} label={content.a11y.switchLang} target={target} />
+      <a
+        href={cvHref}
+        class="hidden items-center gap-1.5 rounded-lg border border-line-strong px-3 py-2 text-sm font-medium text-ink transition-colors hover:bg-elevated sm:inline-flex"
+      >
+        <Icon name="download" size={15} />
+        {content.hero.ctaCv}
+      </a>
+
+      <details class="relative lg:hidden">
+        <summary
+          class="grid size-9 cursor-pointer list-none place-items-center rounded-lg border border-line text-muted transition-colors hover:text-ink [&::-webkit-details-marker]:hidden"
+          aria-label={content.nav.contact}
+        >
+          <Icon name="chevron" size={18} class="[details[open]_&]:rotate-90 transition-transform" />
+        </summary>
+        <ul class="absolute end-0 mt-2 w-52 rounded-xl border border-line bg-elevated p-2 shadow-2xl">
+          {nav.map((item) => (
+            <li>
+              <a href={item.href} class="block rounded-lg px-3 py-2 text-sm text-muted hover:bg-surface hover:text-ink">
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a href={cvHref} class="mt-1 flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink hover:bg-surface">
+              <Icon name="download" size={15} />
+              {content.hero.ctaCv}
+            </a>
+          </li>
+        </ul>
+      </details>
+    </div>
+  </div>
+</header>

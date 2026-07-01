@@ -1,0 +1,80 @@
+---
+import type { Content } from '../../i18n/content';
+import SignatureHero from '../islands/SignatureHero.tsx';
+import RotatingRoles from '../islands/RotatingRoles.tsx';
+import Icon from '../Icon.astro';
+
+interface Props {
+  content: Content;
+  cvHref: string;
+}
+const { content, cvHref } = Astro.props;
+const h = content.hero;
+---
+<section id="top" class="relative flex min-h-[100svh] items-center overflow-hidden pt-16">
+  <!-- Signature background: pointer-reactive canvas + one violet glow -->
+  <div class="pointer-events-none absolute inset-0 -z-10">
+    <div
+      class="absolute inset-0"
+      style="background: radial-gradient(60% 50% at 50% 30%, color-mix(in oklab, var(--color-accent) 16%, transparent), transparent 70%);"
+    >
+    </div>
+    <SignatureHero client:idle />
+  </div>
+
+  <div class="container-page">
+    <div class="max-w-3xl" data-reveal-group>
+      <p class="inline-flex items-center gap-2 rounded-full border border-line bg-surface/60 px-3.5 py-1.5 text-sm text-muted" data-reveal>
+        <span class="relative flex size-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-2 opacity-75"></span>
+          <span class="relative inline-flex size-2 rounded-full bg-accent-2"></span>
+        </span>
+        {h.status}
+      </p>
+
+      <p class="mt-8 font-mono text-lg text-muted" data-reveal>{h.greeting}</p>
+      <h1
+        class="mt-1 font-semibold tracking-tight"
+        style="font-size:var(--text-display);line-height:var(--text-display--line-height);letter-spacing:var(--text-display--letter-spacing)"
+      >
+        {h.name}
+      </h1>
+
+      <p class="mt-4 text-2xl font-medium sm:text-3xl" data-reveal>
+        <RotatingRoles roles={h.roles} client:idle />
+      </p>
+
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-muted" data-reveal>
+        {h.valueProp}
+      </p>
+
+      <div class="mt-9 flex flex-wrap items-center gap-3" data-reveal>
+        <a
+          href="#work"
+          data-magnetic
+          class="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-medium text-bg transition-colors hover:bg-white"
+        >
+          {h.ctaWork}
+          <Icon name="arrow" size={17} class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 rtl:group-hover:-translate-x-0.5" />
+        </a>
+        <a
+          href={cvHref}
+          class="inline-flex items-center gap-2 rounded-full border border-line-strong px-6 py-3 font-medium text-ink transition-colors hover:bg-elevated"
+        >
+          <Icon name="download" size={17} />
+          {h.ctaCv}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <a
+    href="#work"
+    class="absolute inset-x-0 bottom-7 mx-auto flex w-fit flex-col items-center gap-1 text-xs text-faint transition-colors hover:text-muted"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <span class="font-mono uppercase tracking-widest">{h.scrollHint}</span>
+    <Icon name="arrowDown" size={16} class="animate-bounce" />
+  </a>
+</section>

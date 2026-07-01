@@ -1,0 +1,50 @@
+---
+import type { Content } from '../../i18n/content';
+import Section from '../Section.astro';
+import { PHOTO, IDENTITY } from '../../data/site';
+
+interface Props {
+  content: Content;
+}
+const { content } = Astro.props;
+const a = content.about;
+const base = import.meta.env.BASE_URL;
+const photo = `${base}${PHOTO}`.replace(/\/{2,}/g, '/');
+---
+<Section id="about" eyebrow={a.eyebrow} title={a.title}>
+  <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+    <div data-reveal-group>
+      <div data-reveal class="relative mx-auto w-full max-w-xs">
+        <div
+          class="absolute -inset-3 -z-10 rounded-3xl opacity-60 blur-2xl"
+          style="background: linear-gradient(140deg, color-mix(in oklab, var(--color-accent) 45%, transparent), color-mix(in oklab, var(--color-accent-2) 35%, transparent));"
+        >
+        </div>
+        <img
+          src={photo}
+          alt={`${IDENTITY.name}, software engineer`}
+          width="360"
+          height="440"
+          loading="lazy"
+          decoding="async"
+          class="aspect-[9/11] w-full rounded-2xl border border-line-strong object-cover"
+        />
+      </div>
+
+      <dl class="mt-8 grid grid-cols-3 gap-3" data-reveal>
+        {a.highlights.map((hl) => (
+          <div class="card p-4 text-center">
+            <dd class="font-mono text-2xl font-semibold text-gradient">{hl.value}</dd>
+            <dt class="mt-1 text-xs leading-tight text-faint">{hl.label}</dt>
+          </div>
+        ))}
+      </dl>
+    </div>
+
+    <div class="max-w-2xl space-y-5" data-reveal-group>
+      {a.paragraphs.map((p) => (
+        <p class="text-lg leading-relaxed text-muted" data-reveal>{p}</p>
+      ))}
+    </div>
+  </div>
+</Section>

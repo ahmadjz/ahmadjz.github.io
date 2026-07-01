@@ -1,0 +1,22 @@
+---
+interface Props {
+  id: string;
+  eyebrow?: string;
+  title?: string;
+  class?: string;
+}
+const { id, eyebrow, title, class: cls = '' } = Astro.props;
+const hasHeader = Boolean(eyebrow || title);
+---
+<section id={id} class:list={['scroll-mt-24 py-20 sm:py-28', cls]}>
+  <div class="container-page">
+    {hasHeader && (
+      <header class="mb-12 max-w-2xl" data-reveal-group>
+        {eyebrow && <p class="eyebrow" data-reveal>{eyebrow}</p>}
+        {title && <h2 class="mt-3 font-semibold tracking-tight" style="font-size:var(--text-h2);line-height:var(--text-h2--line-height);letter-spacing:var(--text-h2--letter-spacing)" data-reveal>{title}</h2>}
+        <slot name="intro" />
+      </header>
+    )}
+    <slot />
+  </div>
+</section>

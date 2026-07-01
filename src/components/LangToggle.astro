@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  target: 'en' | 'ar';
+}
+const { href, label, target } = Astro.props;
+---
+<a
+  href={href}
+  hreflang={target}
+  aria-label={label}
+  class="inline-grid h-9 min-w-9 place-items-center rounded-lg border border-line px-2.5 font-mono text-sm text-muted transition-colors hover:border-line-strong hover:text-ink focus-visible:text-ink"
+>
+  {target === 'ar' ? 'ع' : 'EN'}
+</a>

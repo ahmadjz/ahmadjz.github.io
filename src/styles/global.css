@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   Terminal Violet — design tokens
+   Dark-first, near-monochrome zinc base with one violet->cyan signature.
+   Three layers: primitive hex -> semantic token -> Tailwind utility.
+   ========================================================================== */
+@theme {
+  /* ---- Surfaces (zinc, brand-tinted, never pure gray) ---- */
+  --color-bg: #09090b;          /* page background */
+  --color-surface: #131316;     /* cards */
+  --color-elevated: #1c1c20;    /* raised cards / popovers */
+  --color-line: #27272a;        /* hairline borders (border-first elevation) */
+  --color-line-strong: #3f3f46; /* stronger dividers */
+
+  /* ---- Ink ---- */
+  --color-ink: #fafafa;         /* primary text */
+  --color-muted: #a1a1aa;       /* secondary text */
+  --color-faint: #71717a;       /* tertiary / captions */
+
+  /* ---- Signature accent: violet -> cyan ---- */
+  --color-accent: #8b5cf6;      /* violet */
+  --color-accent-soft: #a78bfa;
+  --color-accent-2: #06b6d4;    /* cyan */
+  --color-accent-ink: #ede9fe;  /* text on accent surfaces */
+
+  /* ---- Fonts (self-hosted, imported in Base layout) ---- */
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", monospace;
+  --font-arabic: "IBM Plex Sans Arabic", "Geist Variable", ui-sans-serif, sans-serif;
+
+  /* ---- Fluid type scale (one base -> clamp) ---- */
+  --text-display: clamp(2.75rem, 1.6rem + 5.6vw, 5.5rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.03em;
+  --text-h1: clamp(2rem, 1.3rem + 3.2vw, 3.25rem);
+  --text-h1--line-height: 1.05;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h2: clamp(1.5rem, 1.15rem + 1.6vw, 2.25rem);
+  --text-h2--line-height: 1.1;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h3: clamp(1.15rem, 1rem + 0.7vw, 1.5rem);
+  --text-h3--line-height: 1.2;
+  --text-lead: clamp(1.1rem, 1rem + 0.5vw, 1.375rem);
+  --text-lead--line-height: 1.5;
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--letter-spacing: 0.14em;
+
+  /* ---- Radius ---- */
+  --radius-card: 16px;
+  --radius-chip: 999px;
+
+  /* ---- Layout containers ---- */
+  --container-page: 72rem;
+  --container-prose: 44rem;
+
+  /* ---- Motion tokens ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 200ms;
+  --dur-med: 450ms;
+  --dur-slow: 700ms;
+  --stagger: 60ms;
+  /* direction-aware entrance offset: LTR reveals from the inline-start (left),
+     RTL flips it. Overridden under [dir="rtl"] below. */
+  --slide-from: -16px;
+}
+
+[dir="rtl"] {
+  --slide-from: 16px;
+  --font-sans: var(--font-arabic);
+}
+
+/* ============================================================================
+   Base layer
+   ========================================================================== */
+@layer base {
+  :root {
+    color-scheme: dark;
+    --sig-glow: color-mix(in oklab, var(--color-accent) 55%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  :is(h1, h2, h3, h4) {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Visible, high-contrast focus for keyboard users only */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-soft);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-accent) 40%, transparent);
+    color: var(--color-ink);
+  }
+
+  /* Faint dot-grid texture, fixed behind everything */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--color-line-strong) 60%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 34px 34px;
+    -webkit-mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse 120% 80% at 50% 0%, #000 30%, transparent 75%);
+    opacity: 0.5;
+  }
+}
+
+/* ============================================================================
+   Reduced-motion — no-motion-first.
+   Honors the OS setting AND the in-page toggle (data-motion="off").
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:root[data-motion="off"] {
+  scroll-behavior: auto;
+}
+:root[data-motion="off"] *,
+:root[data-motion="off"] *::before,
+:root[data-motion="off"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* ============================================================================
+   Utilities / components
+   ========================================================================== */
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 3rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--text-eyebrow--letter-spacing);
+    text-transform: uppercase;
+    color: var(--color-accent-soft);
+  }
+
+  /* The one signature gradient — used sparingly on key words + CTAs */
+  .text-gradient {
+    background: linear-gradient(100deg, var(--color-accent-soft), var(--color-accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+}
+
+/* ============================================================================
+   Scroll-reveal + chrome (driven by src/scripts/main.ts)
+   ========================================================================== */
+@layer base {
+  [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+    transition:
+      opacity var(--dur-slow) var(--ease-out-soft),
+      transform var(--dur-slow) var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-header] {
+    transition:
+      transform var(--dur-med) var(--ease-out-soft),
+      background-color var(--dur-med) ease,
+      border-color var(--dur-med) ease,
+      backdrop-filter var(--dur-med) ease;
+  }
+  [data-header].is-scrolled {
+    background-color: color-mix(in oklab, var(--color-bg) 72%, transparent);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-color: var(--color-line);
+  }
+  [data-header].is-hidden {
+    transform: translateY(-115%);
+  }
+
+  [data-magnetic] {
+    transition: transform var(--dur-med) var(--ease-out-expo);
+  }
+
+  /* Animated signature gradient sheen for accent underlines / CTA borders */
+  @keyframes sheen {
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
+/* Reduced-motion / toggle overrides for reveal + magnetic */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+:root[data-motion="off"] [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+:root[data-motion="off"] [data-magnetic] {
+  transform: none !important;
+}

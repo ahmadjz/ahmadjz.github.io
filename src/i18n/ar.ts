@@ -140,6 +140,28 @@ export const ar: Content = {
         featured: true,
       },
       {
+        id: 'eplanet',
+        name: 'Eplanet',
+        tagline: 'تطبيق تجارة إلكترونية متعدّد اللغات: تسوّق وسلّة ودفع وطلبات.',
+        problem:
+          'الحاجة إلى متجر إلكتروني عابر للمنصّات لـiOS وAndroid مع مدفوعات، ونظام محتوى منفصل، ودعم متعدّد اللغات.',
+        approach:
+          'كمطوّر Flutter رئيسي وأكثر المساهمين في فريق من 4 مطوّرين، بنيت التطبيق على معمارية نظيفة مع Riverpod، وDio وRetrofit لـREST إضافةً إلى طبقة GraphQL للمحتوى، وauto_route، ونماذج freezed، ونكهات dev/stage/prod.',
+        impact:
+          'أطلقت المنتجات والسلّة والدفع عبر Stripe وPayPal، والطلبات والفواتير والمفضّلة والتقييمات والمكافآت، مع إشعارات Firebase وروابط عميقة وأربع لغات (العربية والألمانية والإنكليزية والتركية).',
+        tech: ['Flutter', 'Riverpod', 'Retrofit / Dio', 'GraphQL', 'Stripe', 'PayPal', 'Firebase'],
+        metrics: [
+          { value: 26, label: 'وحدة وظيفية' },
+          { value: 68, label: 'نقطة REST' },
+          { value: 4, label: 'لغات' },
+        ],
+        links: {},
+        status: 'shipped',
+        year: '2024',
+        role: 'مطوّر Flutter رئيسي (أكثر المساهمين)',
+        featured: true,
+      },
+      {
         id: 'minbar',
         name: 'Minbar',
         tagline: 'تطبيق تواصل اجتماعي بـFlutter وFirebase: نشر وإعجاب وتعليق واستكشاف.',
@@ -310,10 +332,11 @@ export const ar: Content = {
         dates: 'أبريل 2023 — مايو 2024',
         type: 'عمل حر · عن بُعد · ألمانيا',
         bullets: [
-          'قدت تطبيق Flutter متعدّد المنصّات لـiOS وAndroid بممارسات ترميز نظيفة ومعمارية متينة.',
-          'دمجت الواجهة مع خدمات الخلفية لتجربة سلسة.',
+          'قدت تطوير Flutter لتطبيق Eplanet، متجر إلكتروني عابر للمنصّات لـiOS وAndroid، كأكثر المساهمين (203 من 297 عملية دفع) ضمن فريق من 4 مطوّرين.',
+          'صمّمت 26 وحدة وظيفية على معمارية نظيفة مع Riverpod (82 مزوّداً)، وDio وRetrofit لـREST (19 عميلاً، 68 نقطة)، وطبقة GraphQL للمحتوى.',
+          'أطلقت الدفع عبر Stripe وPayPal، وإشعارات Firebase، وروابط عميقة، وتعريباً بأربع لغات (العربية والألمانية والإنكليزية والتركية) عبر نكهات dev/stage/prod.',
         ],
-        tags: ['Flutter', 'iOS', 'Android'],
+        tags: ['Flutter', 'Riverpod', 'GraphQL', 'Stripe', 'PayPal'],
       },
       {
         company: 'Daoorli & EcoMundo',

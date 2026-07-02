@@ -145,6 +145,28 @@ export const en: Content = {
         featured: true,
       },
       {
+        id: 'eplanet',
+        name: 'Eplanet',
+        tagline: 'A multi-language e-commerce app: shop, cart, checkout, orders.',
+        problem:
+          'A cross-platform online store for iOS and Android was needed, with payments, a headless CMS, and multi-language support.',
+        approach:
+          'As lead Flutter developer and top contributor on a 4-dev team, I built the app on clean architecture with Riverpod, Dio and Retrofit for REST plus a GraphQL CMS layer, auto_route, freezed models, and dev/stage/prod flavors.',
+        impact:
+          'Shipped products, cart, Stripe and PayPal checkout, orders and invoices, favorites, reviews, and rewards, with Firebase push, deep links, and four languages (Arabic, German, English, Turkish).',
+        tech: ['Flutter', 'Riverpod', 'Retrofit / Dio', 'GraphQL', 'Stripe', 'PayPal', 'Firebase'],
+        metrics: [
+          { value: 26, label: 'feature modules' },
+          { value: 68, label: 'REST endpoints' },
+          { value: 4, label: 'languages' },
+        ],
+        links: {},
+        status: 'shipped',
+        year: '2024',
+        role: 'Lead Flutter developer (top contributor)',
+        featured: true,
+      },
+      {
         id: 'minbar',
         name: 'Minbar',
         tagline: 'A Flutter + Firebase social app: post, like, comment, discover.',
@@ -315,10 +337,11 @@ export const en: Content = {
         dates: 'Apr 2023 — May 2024',
         type: 'Freelance · Remote · Germany',
         bullets: [
-          'Led a cross-platform Flutter app for iOS and Android with clean coding practices and robust architecture.',
-          'Integrated the front-end with back-end services for a seamless experience.',
+          'Led Flutter development of Eplanet, a cross-platform iOS and Android e-commerce app, as top contributor (203 of 297 commits) on a 4-developer team.',
+          'Architected 26 feature modules on clean architecture with Riverpod (82 providers), Dio and Retrofit REST (19 clients, 68 endpoints), and a GraphQL CMS layer.',
+          'Shipped Stripe and PayPal checkout, Firebase push, deep links, and four-language localization (Arabic, German, English, Turkish) across dev, stage, and prod flavors.',
         ],
-        tags: ['Flutter', 'iOS', 'Android'],
+        tags: ['Flutter', 'Riverpod', 'GraphQL', 'Stripe', 'PayPal'],
       },
       {
         company: 'Daoorli & EcoMundo',

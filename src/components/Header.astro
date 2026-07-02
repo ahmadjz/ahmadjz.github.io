@@ -1,7 +1,6 @@
 ---
 import type { Content } from '../i18n/content';
 import type { Locale } from '../data/site';
-import MotionToggle from './MotionToggle.astro';
 import LangToggle from './LangToggle.astro';
 import Icon from './Icon.astro';
 
@@ -46,7 +45,6 @@ const target: Locale = lang === 'ar' ? 'en' : 'ar';
     </nav>
 
     <div class="flex items-center gap-2">
-      <MotionToggle labelOn={content.a11y.motionOn} labelOff={content.a11y.motionOff} />
       <LangToggle href={altHref} label={content.a11y.switchLang} target={target} />
       <a
         href={cvHref}

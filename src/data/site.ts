@@ -35,7 +35,7 @@ export const LINKS = {
 export const CV_PDF = 'Ahmad-Jumaa-Zabadneh-CV.pdf';
 export const CV_PDF_AR = 'Ahmad-Jumaa-Zabadneh-CV-Arabic.pdf';
 export const PHOTO = 'ahmad.jpg';
-export const CV_LAST_UPDATED = 'June 2026';
+export const CV_LAST_UPDATED = 'July 2026';
 
 /**
  * Nabta 8-repo polyrepo — the scroll-reveal architecture centerpiece.

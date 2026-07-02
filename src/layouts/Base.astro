@@ -70,14 +70,6 @@ const personLd = {
     <meta name="twitter:description" content={content.meta.description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Apply saved motion preference before paint to avoid a flash -->
-    <script is:inline>
-      try {
-        if (localStorage.getItem('motion') === 'off')
-          document.documentElement.dataset.motion = 'off';
-      } catch (e) {}
-    </script>
-
     <ClientRouter />
     <script type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
   </head>

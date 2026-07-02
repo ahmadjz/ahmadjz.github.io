@@ -69,6 +69,15 @@
 [dir="rtl"] {
   --slide-from: 16px;
   --font-sans: var(--font-arabic);
+  /* Arabic is cursive with tall diacritics: looser leading + no negative
+     tracking, or glyphs (hamza, dots) overlap the line above. */
+  --text-display--line-height: 1.22;
+  --text-display--letter-spacing: 0;
+  --text-h1--line-height: 1.3;
+  --text-h1--letter-spacing: 0;
+  --text-h2--line-height: 1.35;
+  --text-h2--letter-spacing: 0;
+  --text-h3--line-height: 1.4;
 }
 
 /* ============================================================================
@@ -159,17 +168,6 @@
   }
 }
 
-:root[data-motion="off"] {
-  scroll-behavior: auto;
-}
-:root[data-motion="off"] *,
-:root[data-motion="off"] *::before,
-:root[data-motion="off"] *::after {
-  animation-duration: 0.01ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.01ms !important;
-}
-
 /* ============================================================================
    Utilities / components
    ========================================================================== */
@@ -256,12 +254,4 @@
     transform: none !important;
     transition: none !important;
   }
-}
-:root[data-motion="off"] [data-reveal] {
-  opacity: 1 !important;
-  transform: none !important;
-  transition: none !important;
-}
-:root[data-motion="off"] [data-magnetic] {
-  transform: none !important;
 }

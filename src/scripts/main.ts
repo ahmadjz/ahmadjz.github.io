@@ -144,44 +144,10 @@ function wireAnchors(lenis: { scrollTo: (t: HTMLElement, o?: object) => void } |
   });
 }
 
-/** In-page motion toggle. Persists to localStorage; head inline script applies early. */
-function initMotionToggle(): void {
-  const btn = document.querySelector<HTMLElement>('[data-motion-toggle]');
-  if (!btn) return;
-  const sync = () => {
-    const off = document.documentElement.dataset.motion === 'off';
-    btn.setAttribute('aria-pressed', String(off));
-    btn.dataset.state = off ? 'off' : 'on';
-  };
-  sync();
-  btn.addEventListener('click', () => {
-    const off = document.documentElement.dataset.motion === 'off';
-    if (off) {
-      delete document.documentElement.dataset.motion;
-      try {
-        localStorage.setItem('motion', 'on');
-      } catch {
-        /* ignore */
-      }
-      initReveal();
-      initMagnetic();
-    } else {
-      document.documentElement.dataset.motion = 'off';
-      try {
-        localStorage.setItem('motion', 'off');
-      } catch {
-        /* ignore */
-      }
-    }
-    sync();
-  });
-}
-
 export function init(): void {
   initReveal();
   initCountUp();
   initMagnetic();
   initHeader();
-  initMotionToggle();
   initSmoothScroll();
 }

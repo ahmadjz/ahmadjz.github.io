@@ -16,7 +16,7 @@
   /* ---- Ink ---- */
   --color-ink: #fafafa;         /* primary text */
   --color-muted: #a1a1aa;       /* secondary text */
-  --color-faint: #71717a;       /* tertiary / captions */
+  --color-faint: #8b8b96;       /* tertiary / captions (AA on --color-bg) */
 
   /* ---- Signature accent: violet -> cyan ---- */
   --color-accent: #8b5cf6;      /* violet */
@@ -83,6 +83,12 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Avoid double-tap zoom delay on interactive elements */
+  :where(a, button, summary, [role="button"]) {
+    touch-action: manipulation;
   }
 
   body {

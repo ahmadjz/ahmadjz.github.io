@@ -62,7 +62,7 @@ const tierLabels =
             <dl class="mt-6 grid grid-cols-3 gap-4">
               {anchor.metrics.map((m) => (
                 <div>
-                  <dd class="font-mono text-3xl font-semibold text-gradient">
+                  <dd class="font-mono text-3xl font-semibold text-gradient tabular-nums">
                     <span data-countup={m.value}>0</span>{m.suffix}
                   </dd>
                   <dt class="mt-0.5 text-xs text-faint">{m.label}</dt>

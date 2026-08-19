@@ -21,7 +21,7 @@ export const SOCIALS = {
 
 /** Company / project URLs referenced across experience + projects. */
 export const LINKS = {
-  nabtaLive: 'https://ahmadjz.github.io/nabta-web-landing/',
+  nabtaLive: 'https://nabteh.app/',
   cellusys: 'https://cellusys.com/',
   iris: 'https://iris-digital.net/',
   zariot: 'https://www.zariot.com/',

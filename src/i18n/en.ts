@@ -23,7 +23,7 @@ export const en: Content = {
     switchLang: 'التبديل إلى العربية',
   },
   hero: {
-    status: 'Building Nabta — a plants marketplace, solo',
+    status: 'Recently shipped Nabta — a plants marketplace, solo',
     greeting: "Hi, I'm",
     name: IDENTITY.name,
     roles: [
@@ -64,7 +64,7 @@ export const en: Content = {
         approach:
           'I architected and built the whole thing: a NestJS + Prisma + PostgreSQL backend, two Flutter apps over a shared package, a React admin panel, an Astro landing site, and a single-VPS Docker deployment provisioned with Ansible. A Swagger/OpenAPI spec generates the typed mobile and web clients.',
         impact:
-          'The catalog MVP is deployed and end-to-end tested: browse, multi-name search, a smart suggester, and USD to SYP pricing. Cart, checkout, payments, and an AI plant-doctor flow are in active development.',
+          'The catalog MVP is deployed and end-to-end tested: browse, multi-name search, a smart suggester, and USD to SYP pricing. Cart, checkout, payments, and an AI plant-doctor flow were in development when my engagement ended in June 2026.',
         tech: ['NestJS 11', 'Prisma 6', 'PostgreSQL 16', 'Flutter', 'React 19', 'Astro', 'Docker', 'Ansible', 'Redis', 'MinIO'],
         metrics: [
           { value: 8, label: 'repositories' },
@@ -72,7 +72,7 @@ export const en: Content = {
           { value: 25, label: 'backend modules' },
         ],
         links: { live: LINKS.nabtaLive },
-        status: 'building',
+        status: 'shipped',
         year: '2026',
         role: 'Solo full-stack & infrastructure engineer',
         featured: true,
@@ -95,7 +95,7 @@ export const en: Content = {
           { value: 19, suffix: '-job', label: 'CI pipeline' },
         ],
         links: { company: LINKS.cellusys },
-        status: 'building',
+        status: 'shipped',
         year: '2025',
         role: 'Full-stack developer',
         featured: true,
@@ -246,10 +246,10 @@ export const en: Content = {
         company: 'Solarya — Nabta',
         url: LINKS.nabtaLive,
         role: 'Solo Full-Stack & Infrastructure Engineer',
-        dates: 'May 2026 — Present',
+        dates: 'May 2026 — Jun 2026',
         type: 'Freelance · Remote',
         bullets: [
-          'Architecting and building a plants e-commerce platform end to end as an 8-repo polyrepo: backend, two mobile apps, a web admin, a landing site, and VPS infrastructure.',
+          'Architected and built a plants e-commerce platform end to end as an 8-repo polyrepo: backend, two mobile apps, a web admin, a landing site, and VPS infrastructure.',
           'Backend in NestJS 11, Prisma 6, and PostgreSQL 16: 25 modules, 59 REST endpoints, OTP auth, role-based access, Redis caching, BullMQ jobs, and MinIO media.',
           'Two Flutter apps over a shared package plus a React 19 admin panel, all typed against a Swagger/OpenAPI spec, deployed on a single VPS via Docker Compose and Ansible.',
         ],
@@ -259,12 +259,12 @@ export const en: Content = {
         company: 'Cellusys',
         url: LINKS.cellusys,
         role: 'Full-Stack Developer',
-        dates: 'Dec 2025 — Present',
+        dates: 'Dec 2025 — Jun 2026',
         type: 'Full-time · Remote · Ireland',
         bullets: [
-          'Building a telecom OTA platform from scratch: a Nuxt 4 frontend and a Spring Boot (Java 21) API with 42 REST endpoints across 5 controllers.',
+          'Built a telecom OTA platform from scratch: a Nuxt 4 frontend and a Spring Boot (Java 21) API with 42 REST endpoints across 5 controllers.',
           'Built a standalone HSM gateway integrating SoftHSM over PKCS#11, exposing AES-CBC and RFC 4493 AES-CMAC operations plus key management.',
-          'Containerized the platform as 14 services and contributed to a 19-job GitLab CI/CD pipeline; currently rolling out i18n across web and API.',
+          'Containerized the platform as 14 services, contributed to a 19-job GitLab CI/CD pipeline, and rolled out i18n across web and API.',
         ],
         tags: ['Nuxt 4', 'Spring Boot', 'Elasticsearch', 'HSM', 'Docker'],
       },
@@ -403,7 +403,7 @@ export const en: Content = {
     educationTitle: 'Education',
     school: 'Syrian Virtual University',
     degree: 'IT Engineering — Software Engineering',
-    dates: 'Aug 2019 — Expected 2026',
+    dates: 'Aug 2019 — 2026',
     detail: 'GPA 2.75 / 4.0 (Very Good), 288 credit hours across 50+ courses, while working full-time.',
     projects: [
       { name: 'Graduation project', desc: 'A web data-analytics platform: upload CSVs, build dashboards with pivot tables and charts (React, TypeScript, Firebase).' },

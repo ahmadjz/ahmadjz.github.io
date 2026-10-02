@@ -49,4 +49,5 @@ transform/opacity only; the hero `<h1>` is never hidden. RTL uses logical CSS.
 
 Push to `main` → the Deploy workflow builds and rsyncs `dist/` to the VPS (`/srv/ahmadjz.tech`,
 served by Caddy). Server config lives in the private `ahmadjz/vps-infra` repo. Secrets:
-`VPS_SSH_KEY` (deploy key, locked to rrsync on the server) and `VPS_KNOWN_HOSTS`.
+`VPS_SSH_KEY` (deploy key, locked to rrsync on the server) and `VPS_KNOWN_HOSTS`. The same build
+is also published to GitHub Pages so <https://ahmadjz.github.io> keeps working.

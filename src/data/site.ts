@@ -3,7 +3,7 @@
  * architecture graph. Localized prose lives in src/i18n/{en,ar}.ts.
  */
 
-export const SITE_URL = 'https://ahmadjz.github.io';
+export const SITE_URL = 'https://ahmadjz.tech';
 
 export const IDENTITY = {
   name: 'Ahmad Jumaa Zabadneh',

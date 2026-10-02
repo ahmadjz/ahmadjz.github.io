@@ -2,9 +2,9 @@
 
 Personal portfolio + CV site for **Ahmad Jumaa Zabadneh** — full-stack engineer.
 Bilingual (English default at `/`, Arabic at `/ar/` with full RTL), dark-first
-"Terminal Violet" theme, tasteful motion, deployed free on GitHub Pages.
+"Terminal Violet" theme, tasteful motion, self-hosted on a VPS behind Caddy.
 
-Live: <https://ahmadjz.github.io>
+Live: <https://ahmadjz.tech>
 
 ## Stack
 
@@ -47,6 +47,6 @@ transform/opacity only; the hero `<h1>` is never hidden. RTL uses logical CSS.
 
 ## Deploy
 
-Push to `main` → the Deploy workflow builds and publishes to Pages. One-time setup:
-**Settings → Pages → Source → GitHub Actions**. Repo is named `ahmadjz.github.io`
-so it serves at the root (`base: '/'`).
+Push to `main` → the Deploy workflow builds and rsyncs `dist/` to the VPS (`/srv/ahmadjz.tech`,
+served by Caddy). Server config lives in the private `ahmadjz/vps-infra` repo. Secrets:
+`VPS_SSH_KEY` (deploy key, locked to rrsync on the server) and `VPS_KNOWN_HOSTS`.

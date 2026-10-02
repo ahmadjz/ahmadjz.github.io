@@ -1,6 +1,6 @@
 # AGENTS.md — ahmadjz.github.io (portfolio site)
 
-Personal portfolio + CV site for Ahmad Jumaa Zabadneh. Public repo, GitHub Pages.
+Personal portfolio + CV site for Ahmad Jumaa Zabadneh. Private repo, self-hosted at https://ahmadjz.tech.
 Sibling of the private CV repo (`../private`, Typst) — this one is PUBLIC, so never
 put private personal data (DOB, address, national IDs) here.
 
@@ -42,5 +42,5 @@ npx astro check    # type-check (CI gate)
 
 ## Deploy
 
-Push to `main` → `.github/workflows/deploy.yml` builds and ships to Pages. Serves at the
-root (`base: '/'`) because the repo is named `ahmadjz.github.io`. Push as `ahmadjz`.
+Push to `main` → `.github/workflows/deploy.yml` builds and rsyncs `dist/` to the VPS as
+`deploy` (server config: private `ahmadjz/vps-infra`). Push as `ahmadjz`.
